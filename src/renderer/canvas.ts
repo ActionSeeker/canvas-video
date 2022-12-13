@@ -16,6 +16,7 @@ export class CanvasManipuilator {
     private sineRenderer: SineRenderer
     private sineRenderer2: SineRenderer
     private sineRenderer3: SineRenderer
+    private sineRenderer4: SineRenderer
 
     constructor(identifier: string, videoId: string) {
         this.canvas = document.getElementById(identifier) as HTMLCanvasElement
@@ -59,6 +60,14 @@ export class CanvasManipuilator {
             '#ADC5CE',
             0.5,
             400
+        )
+        this.sineRenderer4 = new SineRenderer(
+            this.context,
+            6,
+            90,
+            '#ADC5CE',
+            0.5,
+            -400
         )
     }
 
@@ -125,6 +134,7 @@ export class CanvasManipuilator {
         // this.sineRenderer.render()
         this.sineRenderer2.render()
         this.sineRenderer3.render()
+        this.sineRenderer4.render()
         return
     }
 

@@ -1,4 +1,6 @@
 export class SineRenderer {
+    private thresholdAmplitude: number
+    private reverse: boolean = false
     constructor(
         private context: CanvasRenderingContext2D,
         private lineWidth: number = 1,
@@ -6,7 +8,9 @@ export class SineRenderer {
         private stroke: string = '#fff',
         private frequency: number = 5,
         private amplitude: number = 300
-    ) {}
+    ) {
+        this.thresholdAmplitude = amplitude
+    }
 
     public render() {
         this.context.beginPath()
@@ -24,5 +28,7 @@ export class SineRenderer {
         this.context.stroke()
         this.context.closePath()
         this.phase += 50
+        // this.reverse = Math.abs(this.amplitude) >= this.thresholdAmplitude
+        // this.amplitude += (this.reverse ? -1 : 1) * 10
     }
 }
