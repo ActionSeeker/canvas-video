@@ -1,6 +1,6 @@
 export class SineRenderer {
-    private thresholdAmplitude: number
-    private reverse: boolean = false
+    // private thresholdAmplitude: number
+    // private reverse: boolean = false
     constructor(
         private context: CanvasRenderingContext2D,
         private lineWidth: number = 1,
@@ -9,7 +9,7 @@ export class SineRenderer {
         private frequency: number = 5,
         private amplitude: number = 300
     ) {
-        this.thresholdAmplitude = amplitude
+        // this.thresholdAmplitude = amplitude
     }
 
     public render() {
