@@ -33,4 +33,24 @@ export default class EMath {
             y: (coordinate1.y + coordinate2.y) / 2,
         }
     }
+
+    private waveMagic(
+        angle: number,
+        phase: number = 0,
+        frequency: number = 1
+    ): number {
+        return ((angle + phase) * Math.PI) / frequency
+    }
+
+    public eSin(angle: number, phase: number = 0, frequency: number = 1) {
+        return Math.sin(this.waveMagic(angle, phase, frequency) / 180)
+    }
+
+    public eCos(angle: number, phase: number = 0, frequency: number = 1) {
+        return Math.cos(this.waveMagic(angle, phase, frequency) / 180)
+    }
+
+    public eTan(angle: number, phase: number = 0, frequency: number = 1) {
+        return Math.tan(this.waveMagic(angle, phase, frequency) / 180)
+    }
 }

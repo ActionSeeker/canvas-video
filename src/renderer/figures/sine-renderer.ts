@@ -1,34 +1,51 @@
+import EMath from '../extended-math'
+
 export class SineRenderer {
-    // private thresholdAmplitude: number
-    // private reverse: boolean = false
+    private eMath: EMath
+    private lineWidth: number = 5
+    private frequency: number = 0.5
+    private amplitude: number = 300
+
     constructor(
         private context: CanvasRenderingContext2D,
-        private lineWidth: number = 1,
         private phase: number = 0,
         private stroke: string = '#fff',
-        private frequency: number = 5,
-        private amplitude: number = 300
+        private xOffset: number = 0,
+        private yOffset: number = 0
     ) {
-        // this.thresholdAmplitude = amplitude
+        this.eMath = new EMath()
     }
 
     public render() {
         this.context.beginPath()
         let x = this.context.canvas.width / 2
-        for (let y = this.context.canvas.height; y > 0; y -= 0.1) {
-            this.context.moveTo(x, y)
+        let y = this.context.canvas.height
+        for (; y > 0; y -= 0.1) {
+            this.context.moveTo(x + this.xOffset, y + this.yOffset)
             x =
                 this.context.canvas.width / 2 -
-                Math.sin(((y + this.phase) * Math.PI * this.frequency) / 180) *
-                    this.amplitude
-            this.context.lineTo(x, y)
+                this.waveFunc2(y + this.yOffset) +
+                this.xOffset
+            this.context.lineTo(x + this.xOffset, y + this.yOffset)
         }
         this.context.strokeStyle = this.stroke
         this.context.lineWidth = this.lineWidth
         this.context.stroke()
         this.context.closePath()
         this.phase += 50
-        // this.reverse = Math.abs(this.amplitude) >= this.thresholdAmplitude
-        // this.amplitude += (this.reverse ? -1 : 1) * 10
+    }
+
+    private waveFunc1(angle: number): number {
+        return (
+            this.eMath.eSin(angle, this.phase, this.frequency) * this.amplitude
+        )
+    }
+
+    private waveFunc2(angle: number): number {
+        return (
+            this.eMath.eSin(angle ** 0.5, this.phase, this.frequency ** 2) *
+            this.eMath.eCos(angle, this.phase ** 2, this.frequency ** 0.5) *
+            this.amplitude
+        )
     }
 }
